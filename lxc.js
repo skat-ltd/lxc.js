@@ -87,11 +87,10 @@ module.exports = function(config){
      * @param cbData
      */
     obj.copy = function(name, newName, cbComplete, cbData) {
-		  if (!name) return raise(new Error('Missing container name'))
-		  if (!newName) return raise(new Error('Missing new container name'))
-
-	  	sysExec(`lxc-copy -n ${name} -N ${newName}`, cbComplete, cbData);
-			return obj
+      if (!name) return throw new Error('Missing container name')
+      if (!newName) return throw new Error('Missing new container name')
+      sysExec(`lxc-copy -n ${name} -N ${newName}`, cbComplete, cbData)
+      return obj
     }
 
     /**
