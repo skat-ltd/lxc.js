@@ -80,6 +80,21 @@ module.exports = function(config){
     }
 
     /**
+     * Clone a container
+     * @param name
+     * @param newName
+     * @param cbComplete
+     * @param cbData
+     */
+    obj.copy = function(name, newName, cbComplete, cbData) {
+		  if (!name) return raise(new Error('Missing container name'))
+		  if (!newName) return raise(new Error('Missing new container name'))
+
+	  	sysExec(`lxc-copy -n ${name} -N ${newName}`, cbComplete, cbData);
+			return obj
+    }
+
+    /**
      * creates a new snapshot
      * @param name
      * @param cbComplete
